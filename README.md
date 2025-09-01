@@ -28,7 +28,7 @@
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/kirtankirtan/agentic-ai-and-genai.git
+   git clone https://github.com/ramwanikirtan/21days-of-AgenticAI-GenAi.git
    ```
 2. **Explore scripts & notes:** Follow along with the challenge.
 3. **Run Python scripts:** Experiment with AI workflows and projects.

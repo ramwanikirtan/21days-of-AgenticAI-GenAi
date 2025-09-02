@@ -16,7 +16,8 @@ This folder contains my Day 2 project focused on Python logging techniques and b
 - Rotating log files for large applications
 
 ## How to Use
-- Explore the scripts in this folder to see logging examples
+- Explore the scripts in 
+this folder to see logging examples
 - Run the Python files to observe log outputs in the console and log files
 
 ## Resources
@@ -26,3 +27,4 @@ This folder contains my Day 2 project focused on Python logging techniques and b
 ---
 
 This project helped me understand and implement robust logging for Python applications.
+

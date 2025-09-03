@@ -19,6 +19,10 @@ Pydantic is a powerful library for data validation and settings management using
 - **Data Classes vs. Pydantic Models:** Compared Python `dataclass` (no validation) with Pydantic models (strict validation).
 - **List Fields:** Defining fields as lists and handling type casting.
 - **Model Schema:** Generating JSON schema for models using `.model_json_schema()`.
+- **Field Validator:** Custom validation and transformation for individual fields using `@field_validator`.
+- **Model Validator:** Validating and transforming multiple fields or the whole model using `@model_validator`.
+- **Computed Fields:** Using `@computed_field` to create fields calculated from other data.
+- **Serialization:** Converting models to dictionaries (`model_dump`) and JSON (`model_dump_json`) for storage or transfer.
 
 ## Key Techniques & Examples
 - Creating models with required and optional fields
@@ -27,6 +31,8 @@ Pydantic is a powerful library for data validation and settings management using
 - Using nested models for structured data
 - Customizing fields with constraints and descriptions
 - Comparing dataclasses and Pydantic models for validation
+- Writing custom field and model validators
+- Serializing models for APIs and data storage
 
 ## How to Use
 - Explore `intro.ipynb` for step-by-step code examples and explanations
@@ -38,4 +44,4 @@ Pydantic is a powerful library for data validation and settings management using
 
 ---
 
-This project helped me master robust data validation and modeling in Python using Pydantic.
+This project helped me master robust data validation, custom validation logic, and serialization in Python using Pydantic.

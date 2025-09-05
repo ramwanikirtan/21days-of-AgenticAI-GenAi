@@ -1,0 +1,7 @@
+# Ignore environment files with secrets
+*.env
+.env
+Day03/langchain_models/LLMs/.env
+Day03/langchain_models/chatModels/.env
+Day03/langchain_models/embeddingModels/.env
+Projects/LangchainProject/.env

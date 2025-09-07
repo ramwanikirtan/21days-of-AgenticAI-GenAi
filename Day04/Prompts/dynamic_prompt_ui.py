@@ -16,12 +16,6 @@ paper_input = st.selectbox(
     "Auto-Encoding Variational Bayes",
     "ArcMemo: Abstract Reasoning Composition with Lifelong LLM Memory",
     "Psychologically Enhanced AI Agents",
-    "Evaluating Quality of Gaming Narratives Co-created with AI",
-    "Generative Artificial Intelligence: A Systematic Review and Applications",
-    "Generative AI in Industrial Machine Vision — A Review",
-    "Top 15 Research Papers on GenAI",
-    "GenAI_Papers Repository",
-    "Generative AI: A Systematic Review Using Topic Modelling"
 ]
 )
 
@@ -54,6 +48,8 @@ prompt_template = load_prompt('prompt_template.json')
 
 # adv 1: default validatio using advance feature like validate_true
 # adv 2 : Reusability,  save template as json
+# adv 3 : Tightly coupled with Langchain ecosystem
+
 
 
 ## filling the place holders
@@ -69,6 +65,5 @@ prompt = prompt_template.invoke({
 if st.button("Generate Summary"):
     result = model.invoke(prompt)
     st.text("Generating summary...")
-
     st.write(result.content)
     

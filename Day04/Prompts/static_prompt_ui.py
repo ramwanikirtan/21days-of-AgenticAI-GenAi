@@ -14,3 +14,7 @@ if st.button("Generate"):
         response = llm.invoke(user_prompt)
         st.write(response.content)
         st.text("Response generated successfully!")
+
+
+### static prompts and dynamic prompts
+

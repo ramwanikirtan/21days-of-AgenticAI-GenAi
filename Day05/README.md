@@ -1,61 +1,63 @@
-# Day 5: Structured Outputs with Pydantic and TypedDict in Python
+# Day 5: Structured Outputs, Output Parsers, and Pydantic in LangChain
 
 ## What I Learned
 
-- The difference between Python's `TypedDict` (type hints, no runtime validation) and Pydantic's `BaseModel` (runtime validation, type coercion, and error reporting).
-- How to use Pydantic for data validation, default values, optional fields, and type coercion.
-- How Pydantic enforces strict types (e.g., string vs. int) and validates formats (e.g., email addresses with `EmailStr`).
-- How to debug and interpret Pydantic validation errors.
-- The importance of re-running all cells after installing new packages in Jupyter/VS Code notebooks.
+- How to use LangChain's output parsers, including StrOutputParser for raw string output and structured output with Pydantic models.
+- The difference between static type hints (TypedDict) and runtime validation (Pydantic BaseModel).
+- How to use HuggingFace and Google Gemini (GemAI) models with LangChain for both text generation and structured outputs.
+- How to debug and resolve common issues: missing API keys, unsupported structured output, and kernel restarts in notebooks.
+- The importance of running all cells and saving outputs for GitHub rendering.
 
 ## Key Concepts & Demos
 
-### 1. TypedDict (Static Type Hints)
-- Used for type hinting dictionaries, but does not enforce types at runtime.
-- Example: You can assign a string to an int field and no error is raised.
+### 1. StrOutputParser
+- Returns the raw model output as a string (no parsing or validation).
+- Useful for simple pipelines or when you want the model's response verbatim.
 
-### 2. Pydantic BaseModel (Runtime Validation)
-- Enforces types and validates data at runtime.
-- Raises errors for invalid types or formats (e.g., wrong email format).
-- Supports default values and optional fields.
-- Coerces types when possible (e.g., string to int).
+### 2. PydanticOutputParser
+- Enforces structured output using Pydantic models.
+- Validates and parses model output into Python objects with type safety.
+- Raises errors for invalid or missing fields.
 
-### 3. Pydantic with EmailStr
-- Demonstrated how to use `EmailStr` for email validation.
-- Shows how invalid emails raise validation errors.
+### 3. TypedDict vs. Pydantic
+- TypedDict: Type hints only, no runtime validation.
+- Pydantic: Full runtime validation, type coercion, and error reporting.
 
-### 4. Common Errors and Debugging
-- ModuleNotFoundError: No module named 'pydantic' — fixed by installing pydantic in the notebook environment.
-- ValidationError: Raised when data does not match the model's type or format requirements.
-- Kernel restarts: Always re-run all cells after installing new packages.
+### 4. HuggingFace & Google Gemini Integration
+- How to use HuggingFaceEndpoint and ChatGoogleGenerativeAI with LangChain.
+- How to set up API keys in .env and load them in code.
+
+### 5. Troubleshooting
+- How to fix ModuleNotFoundError by installing missing packages.
+- How to resolve NotImplementedError for structured output by upgrading packages or using supported models.
+- How to ensure outputs are saved in notebooks for GitHub display.
 
 ## How to Run
 
-1. Open the notebook `Day05/Structured_outputs/WithStructureLLMs/pydantic-demo.ipynb` in VS Code or Jupyter.
-2. If you see a module error, install pydantic in the notebook environment and restart the kernel.
-3. Run all cells from the top to see type validation, coercion, and error handling in action.
+1. Install dependencies:
+   ```sh
+   pip install langchain langchain-google-genai pydantic python-dotenv
+   ```
+2. Set up your `.env` file with required API keys (OpenAI, Google, HuggingFace, etc.).
+3. Open and run the notebooks in `Day05/Structured_outputs/WithStructureLLMs/`.
+4. For scripts, run them from the project root or the correct subfolder.
 
-## Example Code
-
+## Example: Pydantic Structured Output
 ```python
-from pydantic import BaseModel, EmailStr
-from typing import Optional
+from pydantic import BaseModel, Field
+from langchain_openai import ChatOpenAI
+from dotenv import load_dotenv
+load_dotenv()
 
-class Student(BaseModel):
-    name: str = "kirtan"
-    age: Optional[int] = None
-    email: EmailStr
+class Review(BaseModel):
+    summary: str = Field(...)
+    sentiment: str = Field(...)
 
-student = Student(email="kirtan@gmail.com")
-print(student.name)
-print(student.age)
-print(student.email)
+model = ChatOpenAI(method="function_calling")
+structured_model = model.with_structured_output(Review)
+result = structured_model.invoke("The product is great!")
+print(result.summary, result.sentiment)
 ```
 
-## Troubleshooting
-- If you get a module error, install pydantic in the notebook (not just in your system Python).
-- If you get a validation error, check your data types and formats.
-- Always re-run all cells after installing or updating packages.
-
 ---
-This day focused on robust data validation and type safety in Python using Pydantic, and how it compares to static type hints with TypedDict.
+This day focused on robust data validation, output parsing, and integrating multiple LLM providers with LangChain for both research and production use.

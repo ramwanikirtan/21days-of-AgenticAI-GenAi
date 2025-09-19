@@ -1,3 +1,6 @@
+# Ignore environment variable files
+.env
+Projects/LangchainProject/.env
 # Ignore environment files with secrets
 *.env
 .env
